@@ -52,7 +52,8 @@ class ThriftJSONDecoder(json.JSONDecoder):
             converted_val = self._convert(val[field_name], field_ttype, field_ttype_info)
             setattr(ret, field_name, converted_val)
     elif ttype == TType.LIST:
-      (element_ttype, element_ttype_info) = ttype_info
+      element_ttype = ttype_info[0]
+      element_ttype_info = ttype_info[1]
       ret = [self._convert(x, element_ttype, element_ttype_info) for x in val]
     elif ttype == TType.SET:
       (element_ttype, element_ttype_info) = ttype_info
